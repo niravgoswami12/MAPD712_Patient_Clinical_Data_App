@@ -1,117 +1,50 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { NavigationContainer } from "@react-navigation/native"
+import {createStackNavigator} from "@react-navigation/stack"
+import PatientAddView from "./app/screens/PatientAddView";
+import PatientListView from "./app/screens/PatientListView";
+import PatientDetailView from './app/screens/PatientDetailView';
+import PatientRecordListView from './app/screens/PatientRecordListView';
+import PatientRecordAddView from './app/screens/PatientRecordAddView';
+import PatientRecordDetailView from './app/screens/PatientRecordDetailView';
+import colors from './app/config/colors';
+import { constants } from './app/resource/constants';
+import LoginView from './app/screens/LoginView';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const option = ({ route }) => ({ title: route.params?.title })
+const Stack = createStackNavigator()
+const StackNavigator = () => (
+  <Stack.Navigator
+  screenOptions={{
+    headerStyle: {
+      backgroundColor: colors.primary,
+    },
+    headerTintColor: colors.lightText,
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    headerBackTitle:false,
+    }}>
+      {/* <Stack.Screen name ={constants.app_name} component={LoginView} options={option}/>  */}
+      <Stack.Screen name={constants.home} component={PatientListView} options={{headerLeft: ()=> null, gestureEnabled: false}}/>
+      <Stack.Screen name={constants.patient_add_view}  component={PatientAddView} options={option}/>
+      <Stack.Screen name={constants.patient_detail_view} component={PatientDetailView} options={option}/>
+      <Stack.Screen name={constants.patient_record_list_view} component={PatientRecordListView} options={option}/>
+      <Stack.Screen name={constants.patient_record_add_view} component={PatientRecordAddView} options={option}/>
+      <Stack.Screen name={constants.patient_record_detail_view} component={PatientRecordDetailView} options={option}/>
+  </Stack.Navigator>
+)
 
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+export default function App(){
+  return(
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </GestureHandlerRootView>
+   
+  )
+}
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
