@@ -27,7 +27,6 @@ function PatientListView({navigation}) {
 
   const [showAll, setShowAll] = useState('all');
   const toggleSwitch = (status) => {
-    console.log('status', status)
     setShowAll(status)
     if(status == 'all'){
       //Show all patient
@@ -42,7 +41,6 @@ function PatientListView({navigation}) {
     const unsubscribe = navigation.addListener('focus', () => {
       setpageCurrent(1)
       setShowAll('all')
-      console.log('useEffect', showAll)
       if(showAll == 'all'){
         //Show all patient
         loadPatients(false);
@@ -55,7 +53,6 @@ function PatientListView({navigation}) {
   }, [navigation]);
  
   const loadPatients = async (onlyCritical = false) => {
-    console.log('loadPatients', onlyCritical)
     setIsRefreshing(true);
     // const response = await api.getPatientList({page: pageCurrent, limit});
     const response = await api.getPatientList({onlyCritical});
