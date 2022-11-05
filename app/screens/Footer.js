@@ -4,12 +4,14 @@ import { SafeAreaView, View , TouchableOpacity, Text, FlatList, Image} from 'rea
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 import styles from '../config/styles'
+import { constants } from '../resource/constants';
 
 function Footer() {
     const navigation = useNavigation();
   return (
-    <View style={styles.footer}>
-        <TouchableHighlight style={styles.bottomButtons} activeOpacity={0.7} onPress={() => navigation.navigate("Home")}>
+    <View style={{...styles.footer}}>
+
+        <TouchableHighlight style={styles.bottomButtons} activeOpacity={0.7} onPress={() => navigation.navigate(constants.home)}>
             <Image
             source={require('../assets/images/home.png')} 
             style={styles.floatingButtonStyle}

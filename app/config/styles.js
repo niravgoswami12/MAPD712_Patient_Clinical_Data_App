@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.appBackground,
   },
+  headerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    backgroundColor:colors.primary
+},
   input: {
     margin: 10,
     height: 45,
@@ -22,7 +29,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-
+  errorText: {
+    fontSize: 10,
+    color: 'red',
+  },
   //   Submit Button Start
   submitButton: {
     backgroundColor: colors.primary,
@@ -30,6 +40,8 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   buttonText: {
     textAlign: 'center',
@@ -41,29 +53,79 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     margin: 10,
-    alignItems: 'center',
+    // alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
   inputLabel: {
+    marginTop:15,
     width: '25%',
     color: colors.primaryText,
     fontWeight: '700',
     textTransform: 'capitalize',
   },
+  inputItemWrapper:{
+    flexDirection: 'column',
+    width: '75%'
+  },
   inputItem: {
     height: 45,
-    width: '75%',
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
   },
+  inputItemError:{
+    marginTop:10,
+    fontSize: 10,
+    color: 'red',
+  },
+
+  datePicketBtn: {
+    backgroundColor: colors.primary,
+    opacity:0.8,
+    padding: 10,
+    // margin: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  datePicketBtnText: {
+    textAlign: 'center',
+    color: colors.lightText,
+    // fontWeight: 'bold',
+    // fontSize: 18,
+  },
+
+  datePicketBtnImg: {
+    alignself: 'center',
+    height: 30,
+    width: 30,
+    marginRight: 10
+  },
+  itemContainer: {
+    marginVertical: 2,
+    marginHorizontal:10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  itemLabel: {
+    // marginTop:15,
+    width: '25%',
+    color: colors.primaryText,
+    fontWeight: '700',
+    textTransform: 'capitalize',
+  },
   itemValue: {
     height: 45,
     width: '75%',
-    // borderWidth: 1,
-    // borderRadius:5,
-    padding: 10,
+    padding: 14,
+
+  },
+  readingUnitText:{
+    margin: 5, 
+    color: colors.primaryText
   },
   //   Radio Button Start
   radioButtoncontainer: {
@@ -114,7 +176,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
   },
-
   listItemName: {
     flex: 1,
     fontsize: 16,
@@ -146,6 +207,64 @@ const styles = StyleSheet.create({
     alignself: 'center',
     height: 150,
     width: 150,
+  },
+
+
+  recordLlistItemContainer: {
+    flex: 1,
+    backgroundColor: colors.secondary,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    margin: 5,
+    // padding: 5
+  },
+  listItemChildVerticalIcon:{
+    margin: 5,
+    height: 40,
+    width: 40,
+    alignContent:'center',
+    justifyContent:'center'
+  },
+  listItemChildVerticalContainer: {
+    flexDirection: 'column',
+    margin: 5,
+    alignContent:'flex-start',
+    width:"60%"
+  },
+  listItemChildVerticalLabel1:{
+    color: colors.darkText,
+    fontsize: 14,
+    fontWeight: 'bold',
+    textTransform:'uppercase',
+    paddingBottom: 5,
+  },
+  listItemChildVerticalLabel2:{
+    fontSize:12,
+    color:colors.darkText,
+    opacity:0.8,
+    paddingBottom: 5,
+    
+  },
+  listItemChildVerticalLabel3:{
+    fontSize:10,
+    color:colors.primaryText,
+    
+  },
+  listItemChildVerticalButton: {
+    // padding: 5,
+    width: 40,
+    height: 40,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // alignSelf:'flex-end'
+  },
+
+  btnImg: {
+    alignself: 'center',
+    height: 30,
+    width: 30,
   },
 
   buttonImageIconStyle: {

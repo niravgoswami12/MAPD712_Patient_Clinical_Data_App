@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {Alert} from 'react-native';
+import { showToast } from './common';
+import { constants } from './constants';
 
 var url = 'http://localhost:3000/api/';
 var patientPath = 'patient';
@@ -9,25 +11,23 @@ export async function addPatient(patient) {
   return await axios
     .post(`${url}${patientPath}`, patient)
     .then(res => {
-      Alert.alert('Patient Added', 'success!!!', 'Ok', {
-        cancelable: false,
-      });
+      showToast('success', `${constants.messages.add_patient.succes}`, '')
       return true;
     })
-    .catch(res => {
-      Alert.alert('Add Patient', 'Failed! Please fill all information', 'Ok', {
-        cancelable: false,
-      });
+    .catch(error => {
+      let message = error?.response?.data?.message || constants.messages.error;
+      showToast('error', `${constants.messages.add_patient.failed}`, message)
       return false;
     });
 }
 
-export async function getPatientList() {
+export async function getPatientList(params = {}) {
   try {
-    const response = await axios.get(`${url}${patientPath}?${Date.now()}`);
+    const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+    const response = await axios.get(`${url}${patientPath}?${queryString}`);
     return response.data;
   } catch (error) {
-    // Alert.alert('Get Patient List', 'Failed!', 'Ok', {cancelable: false});
+    return false
   }
 }
 
@@ -35,15 +35,12 @@ export async function updatePatient(patientId, patient) {
   return await axios
     .put(`${url}${patientPath}/${patientId}`, patient)
     .then(res => {
-      Alert.alert('Patient Updated', 'success!!!', 'Ok', {
-        cancelable: false,
-      });
+      showToast('success', `${constants.messages.update_patient.succes}`, '')
       return true;
     })
     .catch(res => {
-      Alert.alert('Update Patient', 'Failed! Please fill all information', 'Ok', {
-        cancelable: false,
-      });
+      let message = error?.response?.data?.message || constants.messages.error;
+      showToast('error', `${constants.messages.update_patient.failed}`, message)
       return false;
     });
 }
@@ -52,42 +49,36 @@ export async function deletePatient(patientId) {
   return await axios
     .delete(`${url}${patientPath}/${patientId}`)
     .then(res => {
-      Alert.alert('Patient Deleted', 'success!!!', 'Ok', {
-        cancelable: false,
-      });
+      showToast('success', `${constants.messages.delete_patient.succes}`, '')
       return true;
     })
     .catch(res => {
-      Alert.alert('Delete Patient', 'Failed! Please fill all information', 'Ok', {
-        cancelable: false,
-      });
+      let message = error?.response?.data?.message || constants.messages.error;
+      showToast('error', `${constants.messages.delete_patient.failed}`, message)
       return false;
     });
 }
 
-export async function addPatientRecord(record) {
+export async function addPatientRecord(patientId,record) {
   return await axios
     .post(`${url}${patientPath}/${patientId}/${recordPath}`, record)
     .then(res => {
-      Alert.alert('Patient Record Added', 'success!!!', 'Ok', {
-        cancelable: false,
-      });
+      showToast('success', `${constants.messages.add_patient_record.succes}`, '')
       return true;
     })
-    .catch(res => {
-      Alert.alert('Add Patient Record', 'Failed! Please fill all information', 'Ok', {
-        cancelable: false,
-      });
+    .catch(error => {
+      let message = error?.response?.data?.message || constants.messages.error;
+      showToast('error', `${constants.messages.add_patient_record.failed}`, message)
       return false;
     });
 }
 
 export async function getPatientRecordList(patientId) {
   try {
-    const response = await axios.get(`${url}${patientPath}/${patientId}/${recordPath}}`);
+    const response = await axios.get(`${url}${patientPath}/${patientId}/${recordPath}`);
     return response.data;
   } catch (error) {
-    // Alert.alert('Get Patient Record List', 'Failed!', 'Ok', {cancelable: false});
+    return false
   }
 }
 
@@ -95,15 +86,12 @@ export async function updatePatientRecord(patientId, recordId, record) {
   return await axios
     .put(`${url}${patientPath}/${patientId}/${recordPath}/${recordId}`, record)
     .then(res => {
-      Alert.alert('Patient Record Updated', 'success!!!', 'Ok', {
-        cancelable: false,
-      });
+      showToast('success', `${constants.messages.update_patient_record.succes}`, '')
       return true;
     })
     .catch(res => {
-      Alert.alert('Update Patient Record', 'Failed! Please fill all information', 'Ok', {
-        cancelable: false,
-      });
+      let message = error?.response?.data?.message || constants.messages.error;
+      showToast('error', `${constants.messages.update_patient_record.failed}`, message)
       return false;
     });
 }
@@ -112,15 +100,13 @@ export async function deletePatientRecord(patientId, recordId) {
   return await axios
     .delete(`${url}${patientPath}/${patientId}/${recordPath}/${recordId}`)
     .then(res => {
-      Alert.alert('Patient Record Deleted', 'success!!!', 'Ok', {
-        cancelable: false,
-      });
+      showToast('success', `${constants.messages.delete_patient_record.succes}`, '')
+      
       return true;
     })
     .catch(res => {
-      Alert.alert('Delete Patient Record', 'Failed! Please fill all information', 'Ok', {
-        cancelable: false,
-      });
+      let message = error?.response?.data?.message || constants.messages.error;
+      showToast('error', `${constants.messages.delete_patient_record.failed}`, message)
       return false;
     });
 }
