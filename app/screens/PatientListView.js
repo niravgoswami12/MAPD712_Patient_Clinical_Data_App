@@ -161,9 +161,9 @@ const ListFooter = () => {
         )}
         ListHeaderComponent={() => (
           <View>
-            <Text style={styles.listHeader}>Patient List {showAll ? 'all' : 'criti'}</Text>
+            <Text style={styles.listHeader}>Patient List</Text>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 5 }}>
           <TouchableOpacity style={showAll == 'all' ? styles.toggleButtonActive : styles.toggleButton} onPress={() => toggleSwitch('all')}>
             <Text style={styles.toggleButtonText}>
               All 
