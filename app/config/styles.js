@@ -331,18 +331,20 @@ const styles = StyleSheet.create({
     color: colors.lightText,
     fontWeight: 'bold',
     alignItems: 'center',
-    fontSize: 18,
+    fontSize: 16,
   },
   // Footer End
 
   toggleButton: {
     backgroundColor: colors.secondary,
-    padding: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     height: 35,
   },
   toggleButtonActive: {
     backgroundColor: colors.primary,
-    padding: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     height: 35,
     borderBottomWidth: 5,
     borderBottomColor: colors.primaryText
