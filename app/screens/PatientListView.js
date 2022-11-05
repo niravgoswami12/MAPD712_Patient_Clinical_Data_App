@@ -25,19 +25,37 @@ function PatientListView({navigation}) {
   const [totalPage, setTotalPage] = useState(1);
   const limit = 5
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [showAll, setShowAll] = useState('all');
+  const toggleSwitch = (status) => {
+    console.log('status', status)
+    setShowAll(status)
+    if(status == 'all'){
+      //Show all patient
+      loadPatients(false);
+    }else{
+      //Show only critical patient
+      loadPatients(true);
+    }
+  };
 
-  useFocusEffect(
-    React.useCallback(() => {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
       setpageCurrent(1)
-      loadPatients();
-    }, []),
-  );
-  const showCritical = async () => {
-    // loadPatients(true)
-  }
+      setShowAll('all')
+      console.log('useEffect', showAll)
+      if(showAll == 'all'){
+        //Show all patient
+        loadPatients(false);
+      }else{
+        //Show only critical patient
+        loadPatients(true);
+      }
+    });
+    return unsubscribe;
+  }, [navigation]);
+ 
   const loadPatients = async (onlyCritical = false) => {
+    console.log('loadPatients', onlyCritical)
     setIsRefreshing(true);
     // const response = await api.getPatientList({page: pageCurrent, limit});
     const response = await api.getPatientList({onlyCritical});
@@ -143,7 +161,20 @@ const ListFooter = () => {
         )}
         ListHeaderComponent={() => (
           <View>
-            <Text style={styles.listHeader}>Patient List</Text>
+            <Text style={styles.listHeader}>Patient List {showAll ? 'all' : 'criti'}</Text>
+
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <TouchableOpacity style={showAll == 'all' ? styles.toggleButtonActive : styles.toggleButton} onPress={() => toggleSwitch('all')}>
+            <Text style={styles.toggleButtonText}>
+              All 
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={showAll == 'critical' ? styles.toggleButtonActive : styles.toggleButton} onPress={() => toggleSwitch('critical')}>
+            <Text style={styles.toggleButtonText}>
+              Critical
+            </Text>
+          </TouchableOpacity>
+        </View>
             {/* <TouchableOpacity onPress={() => showCritical()}> */}
             {/* <View style={{flexDirection:'row'}}>
               <Text style={{...styles.listHeader, fontSize: 20}}>Show Only Critical</Text>

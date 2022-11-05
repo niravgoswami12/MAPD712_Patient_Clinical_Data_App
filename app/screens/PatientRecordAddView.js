@@ -91,8 +91,12 @@ function PatientRecordAddView({route, navigation}) {
 
   const patientRecordFormSchema = yup.object().shape({
     reading: yup
-      .number()
+      .string()
       .required('Reading is required')
+      .matches(
+        /^[0-9\/]+$/,
+        "Reading value can be X/Y or X, where X,Y is number"
+      )
   });
 
   const onSubmit = async ({
@@ -209,6 +213,7 @@ function PatientRecordAddView({route, navigation}) {
           modal
           open={open}
           date={dateTime}
+          maximumDate={new Date()}
           onConfirm={(date) => {
             setOpen(false)
             setDateTime(date)

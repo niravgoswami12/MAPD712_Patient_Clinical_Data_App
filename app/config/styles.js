@@ -334,6 +334,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   // Footer End
+
+  toggleButton: {
+    backgroundColor: colors.secondary,
+    padding: 10,
+    height: 35,
+  },
+  toggleButtonActive: {
+    backgroundColor: colors.primary,
+    padding: 10,
+    height: 35,
+    borderBottomWidth: 5,
+    borderBottomColor: colors.primaryText
+  },
+  toggleButtonText: {
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 10,
+  },
 });
 
 export default styles;
