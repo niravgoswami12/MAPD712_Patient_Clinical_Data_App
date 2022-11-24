@@ -3,7 +3,7 @@ import {Alert} from 'react-native';
 import { showToast } from './common';
 import { constants } from './constants';
 
-var url = 'http://localhost:3000/api/';
+var url = 'https://mapd-713-g5-api.herokuapp.com/api/';
 var patientPath = 'patient';
 var recordPath = 'record';
 
